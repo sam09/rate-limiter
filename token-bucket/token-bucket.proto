@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package tokenbucket;
+
+service TokenBucket {
+    rpc AddToken (AddTokenRequest) returns (AddTokenResponse) {}
+    rpc ConsumeToken (ConsumeTokenRequest) returns (ConsumeTokenResponse) {}
+    rpc Refill (RefillTokenRequest) returns (RefillTokenResponse) {}
+}
+
+message Token {
+    string tokenName = 1;
+    int32 id = 2; // Unique Id for each token
+}
+
+message AddTokenRequest {
+    Token token = 1;
+}
+
+message ConsumeTokenRequest {
+}
+
+message ConsumeTokenResponse {
+    Token token = 1;
+}
+
+message RefillTokenRequest {
+    int32 tokens = 1;
+}
+
+message RefillTokenResponse {
+    bool done = 1;
+}
+
+message AddTokenResponse {
+    bool done = 1;
+}
