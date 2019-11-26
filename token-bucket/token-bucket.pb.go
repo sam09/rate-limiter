@@ -25,8 +25,7 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Token struct {
-	TokenName            string   `protobuf:"bytes,1,opt,name=tokenName,proto3" json:"tokenName,omitempty"`
-	Id                   int32    `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
+	Id                   int64    `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -57,22 +56,117 @@ func (m *Token) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_Token proto.InternalMessageInfo
 
-func (m *Token) GetTokenName() string {
-	if m != nil {
-		return m.TokenName
-	}
-	return ""
-}
-
-func (m *Token) GetId() int32 {
+func (m *Token) GetId() int64 {
 	if m != nil {
 		return m.Id
 	}
 	return 0
 }
 
+type CreateBucketRequest struct {
+	RefillTime           int64    `protobuf:"varint,1,opt,name=refillTime,proto3" json:"refillTime,omitempty"`
+	MaxAmount            int64    `protobuf:"varint,2,opt,name=maxAmount,proto3" json:"maxAmount,omitempty"`
+	RefillAmount         int64    `protobuf:"varint,3,opt,name=refillAmount,proto3" json:"refillAmount,omitempty"`
+	Name                 string   `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CreateBucketRequest) Reset()         { *m = CreateBucketRequest{} }
+func (m *CreateBucketRequest) String() string { return proto.CompactTextString(m) }
+func (*CreateBucketRequest) ProtoMessage()    {}
+func (*CreateBucketRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_e621357f752d376e, []int{1}
+}
+
+func (m *CreateBucketRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CreateBucketRequest.Unmarshal(m, b)
+}
+func (m *CreateBucketRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CreateBucketRequest.Marshal(b, m, deterministic)
+}
+func (m *CreateBucketRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateBucketRequest.Merge(m, src)
+}
+func (m *CreateBucketRequest) XXX_Size() int {
+	return xxx_messageInfo_CreateBucketRequest.Size(m)
+}
+func (m *CreateBucketRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateBucketRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CreateBucketRequest proto.InternalMessageInfo
+
+func (m *CreateBucketRequest) GetRefillTime() int64 {
+	if m != nil {
+		return m.RefillTime
+	}
+	return 0
+}
+
+func (m *CreateBucketRequest) GetMaxAmount() int64 {
+	if m != nil {
+		return m.MaxAmount
+	}
+	return 0
+}
+
+func (m *CreateBucketRequest) GetRefillAmount() int64 {
+	if m != nil {
+		return m.RefillAmount
+	}
+	return 0
+}
+
+func (m *CreateBucketRequest) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+type CreateBucketResponse struct {
+	BucketName           string   `protobuf:"bytes,1,opt,name=bucketName,proto3" json:"bucketName,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CreateBucketResponse) Reset()         { *m = CreateBucketResponse{} }
+func (m *CreateBucketResponse) String() string { return proto.CompactTextString(m) }
+func (*CreateBucketResponse) ProtoMessage()    {}
+func (*CreateBucketResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_e621357f752d376e, []int{2}
+}
+
+func (m *CreateBucketResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CreateBucketResponse.Unmarshal(m, b)
+}
+func (m *CreateBucketResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CreateBucketResponse.Marshal(b, m, deterministic)
+}
+func (m *CreateBucketResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateBucketResponse.Merge(m, src)
+}
+func (m *CreateBucketResponse) XXX_Size() int {
+	return xxx_messageInfo_CreateBucketResponse.Size(m)
+}
+func (m *CreateBucketResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateBucketResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CreateBucketResponse proto.InternalMessageInfo
+
+func (m *CreateBucketResponse) GetBucketName() string {
+	if m != nil {
+		return m.BucketName
+	}
+	return ""
+}
+
 type AddTokenRequest struct {
-	Token                *Token   `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	BucketName           string   `protobuf:"bytes,1,opt,name=bucketName,proto3" json:"bucketName,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -82,7 +176,7 @@ func (m *AddTokenRequest) Reset()         { *m = AddTokenRequest{} }
 func (m *AddTokenRequest) String() string { return proto.CompactTextString(m) }
 func (*AddTokenRequest) ProtoMessage()    {}
 func (*AddTokenRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_e621357f752d376e, []int{1}
+	return fileDescriptor_e621357f752d376e, []int{3}
 }
 
 func (m *AddTokenRequest) XXX_Unmarshal(b []byte) error {
@@ -103,14 +197,15 @@ func (m *AddTokenRequest) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_AddTokenRequest proto.InternalMessageInfo
 
-func (m *AddTokenRequest) GetToken() *Token {
+func (m *AddTokenRequest) GetBucketName() string {
 	if m != nil {
-		return m.Token
+		return m.BucketName
 	}
-	return nil
+	return ""
 }
 
 type ConsumeTokenRequest struct {
+	BucketName           string   `protobuf:"bytes,1,opt,name=bucketName,proto3" json:"bucketName,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -120,7 +215,7 @@ func (m *ConsumeTokenRequest) Reset()         { *m = ConsumeTokenRequest{} }
 func (m *ConsumeTokenRequest) String() string { return proto.CompactTextString(m) }
 func (*ConsumeTokenRequest) ProtoMessage()    {}
 func (*ConsumeTokenRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_e621357f752d376e, []int{2}
+	return fileDescriptor_e621357f752d376e, []int{4}
 }
 
 func (m *ConsumeTokenRequest) XXX_Unmarshal(b []byte) error {
@@ -141,6 +236,13 @@ func (m *ConsumeTokenRequest) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_ConsumeTokenRequest proto.InternalMessageInfo
 
+func (m *ConsumeTokenRequest) GetBucketName() string {
+	if m != nil {
+		return m.BucketName
+	}
+	return ""
+}
+
 type ConsumeTokenResponse struct {
 	Token                *Token   `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -152,7 +254,7 @@ func (m *ConsumeTokenResponse) Reset()         { *m = ConsumeTokenResponse{} }
 func (m *ConsumeTokenResponse) String() string { return proto.CompactTextString(m) }
 func (*ConsumeTokenResponse) ProtoMessage()    {}
 func (*ConsumeTokenResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_e621357f752d376e, []int{3}
+	return fileDescriptor_e621357f752d376e, []int{5}
 }
 
 func (m *ConsumeTokenResponse) XXX_Unmarshal(b []byte) error {
@@ -181,7 +283,7 @@ func (m *ConsumeTokenResponse) GetToken() *Token {
 }
 
 type RefillTokenRequest struct {
-	Tokens               int32    `protobuf:"varint,1,opt,name=tokens,proto3" json:"tokens,omitempty"`
+	BucketName           string   `protobuf:"bytes,1,opt,name=bucketName,proto3" json:"bucketName,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -191,7 +293,7 @@ func (m *RefillTokenRequest) Reset()         { *m = RefillTokenRequest{} }
 func (m *RefillTokenRequest) String() string { return proto.CompactTextString(m) }
 func (*RefillTokenRequest) ProtoMessage()    {}
 func (*RefillTokenRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_e621357f752d376e, []int{4}
+	return fileDescriptor_e621357f752d376e, []int{6}
 }
 
 func (m *RefillTokenRequest) XXX_Unmarshal(b []byte) error {
@@ -212,15 +314,14 @@ func (m *RefillTokenRequest) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_RefillTokenRequest proto.InternalMessageInfo
 
-func (m *RefillTokenRequest) GetTokens() int32 {
+func (m *RefillTokenRequest) GetBucketName() string {
 	if m != nil {
-		return m.Tokens
+		return m.BucketName
 	}
-	return 0
+	return ""
 }
 
 type RefillTokenResponse struct {
-	Done                 bool     `protobuf:"varint,1,opt,name=done,proto3" json:"done,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -230,7 +331,7 @@ func (m *RefillTokenResponse) Reset()         { *m = RefillTokenResponse{} }
 func (m *RefillTokenResponse) String() string { return proto.CompactTextString(m) }
 func (*RefillTokenResponse) ProtoMessage()    {}
 func (*RefillTokenResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_e621357f752d376e, []int{5}
+	return fileDescriptor_e621357f752d376e, []int{7}
 }
 
 func (m *RefillTokenResponse) XXX_Unmarshal(b []byte) error {
@@ -251,15 +352,7 @@ func (m *RefillTokenResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_RefillTokenResponse proto.InternalMessageInfo
 
-func (m *RefillTokenResponse) GetDone() bool {
-	if m != nil {
-		return m.Done
-	}
-	return false
-}
-
 type AddTokenResponse struct {
-	Done                 bool     `protobuf:"varint,1,opt,name=done,proto3" json:"done,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -269,7 +362,7 @@ func (m *AddTokenResponse) Reset()         { *m = AddTokenResponse{} }
 func (m *AddTokenResponse) String() string { return proto.CompactTextString(m) }
 func (*AddTokenResponse) ProtoMessage()    {}
 func (*AddTokenResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_e621357f752d376e, []int{6}
+	return fileDescriptor_e621357f752d376e, []int{8}
 }
 
 func (m *AddTokenResponse) XXX_Unmarshal(b []byte) error {
@@ -290,15 +383,10 @@ func (m *AddTokenResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_AddTokenResponse proto.InternalMessageInfo
 
-func (m *AddTokenResponse) GetDone() bool {
-	if m != nil {
-		return m.Done
-	}
-	return false
-}
-
 func init() {
 	proto.RegisterType((*Token)(nil), "tokenbucket.Token")
+	proto.RegisterType((*CreateBucketRequest)(nil), "tokenbucket.CreateBucketRequest")
+	proto.RegisterType((*CreateBucketResponse)(nil), "tokenbucket.CreateBucketResponse")
 	proto.RegisterType((*AddTokenRequest)(nil), "tokenbucket.AddTokenRequest")
 	proto.RegisterType((*ConsumeTokenRequest)(nil), "tokenbucket.ConsumeTokenRequest")
 	proto.RegisterType((*ConsumeTokenResponse)(nil), "tokenbucket.ConsumeTokenResponse")
@@ -310,25 +398,29 @@ func init() {
 func init() { proto.RegisterFile("token-bucket.proto", fileDescriptor_e621357f752d376e) }
 
 var fileDescriptor_e621357f752d376e = []byte{
-	// 278 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x92, 0x4f, 0x4b, 0xc3, 0x40,
-	0x14, 0xc4, 0x4d, 0x31, 0xa1, 0x9d, 0x88, 0xca, 0xab, 0x4a, 0x09, 0x15, 0xe3, 0x1e, 0x24, 0x82,
-	0xe6, 0x50, 0xf1, 0xe4, 0xc5, 0x3f, 0x27, 0x0f, 0x7a, 0x58, 0xf4, 0x03, 0x58, 0x77, 0x85, 0xd0,
-	0x36, 0x5b, 0xdd, 0xe4, 0xeb, 0x8b, 0xf8, 0xb6, 0xb5, 0x59, 0x35, 0x82, 0xb7, 0xec, 0xec, 0x6f,
-	0xe6, 0xbd, 0x0c, 0x0b, 0xaa, 0xcc, 0x44, 0x97, 0xa7, 0xe3, 0xfa, 0x79, 0xa2, 0xab, 0x7c, 0xfe,
-	0x66, 0x2a, 0x43, 0x31, 0x6b, 0x4e, 0x12, 0xe7, 0x08, 0x1f, 0x3e, 0x8f, 0x34, 0x44, 0x8f, 0xf5,
-	0xfb, 0xa7, 0x99, 0x1e, 0x04, 0x69, 0x90, 0xf5, 0xe4, 0x4a, 0xa0, 0x4d, 0x74, 0x0a, 0x35, 0xe8,
-	0xa4, 0x41, 0x16, 0xca, 0x4e, 0xa1, 0xc4, 0x05, 0xb6, 0xae, 0x94, 0x62, 0xa7, 0xd4, 0xaf, 0xb5,
-	0xb6, 0x15, 0x65, 0x08, 0x99, 0x67, 0x73, 0x3c, 0xa2, 0xbc, 0x31, 0x26, 0x77, 0xa4, 0x03, 0xc4,
-	0x2e, 0xfa, 0x37, 0xa6, 0xb4, 0xf5, 0x4c, 0x37, 0x03, 0xc4, 0x25, 0x76, 0x7c, 0xd9, 0xce, 0x4d,
-	0x69, 0xf5, 0x3f, 0x82, 0x4f, 0x40, 0x52, 0xbf, 0x14, 0xd3, 0xa9, 0xb7, 0xd8, 0x1e, 0x22, 0xbe,
-	0xb6, 0x1c, 0x10, 0xca, 0xc5, 0x49, 0x1c, 0xa3, 0xef, 0xd1, 0x8b, 0x71, 0x84, 0x75, 0x65, 0x4a,
-	0xd7, 0x41, 0x57, 0xf2, 0xb7, 0x38, 0xc2, 0xf6, 0xea, 0x77, 0xdb, 0xb9, 0xd1, 0x7b, 0x80, 0x98,
-	0xa9, 0x6b, 0xde, 0x8e, 0x6e, 0xd1, 0x5d, 0xfa, 0x68, 0xe8, 0xed, 0xfd, 0xad, 0xbd, 0x64, 0xbf,
-	0xe5, 0xd6, 0x0d, 0x13, 0x6b, 0xf4, 0x88, 0x8d, 0x66, 0x3b, 0x94, 0x7a, 0x86, 0x5f, 0xfa, 0x4c,
-	0x0e, 0xff, 0x20, 0xbe, 0x62, 0xef, 0x10, 0xb9, 0x12, 0xe8, 0xc0, 0xc3, 0x7f, 0xf6, 0x98, 0xa4,
-	0xed, 0xc0, 0x32, 0x6e, 0x1c, 0xf1, 0x13, 0x3b, 0xfb, 0x08, 0x00, 0x00, 0xff, 0xff, 0x9b, 0x0d,
-	0xbf, 0xcc, 0x78, 0x02, 0x00, 0x00,
+	// 341 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x93, 0xcd, 0x4e, 0x83, 0x40,
+	0x10, 0xc7, 0x0b, 0xfd, 0x88, 0x9d, 0x36, 0x6a, 0x86, 0x1a, 0x09, 0xa9, 0x8a, 0x7b, 0xe2, 0x22,
+	0x89, 0xf5, 0xe3, 0x6c, 0xed, 0xc9, 0x83, 0x1e, 0x48, 0x7d, 0x00, 0x2a, 0x6b, 0x42, 0x5a, 0xd8,
+	0x0a, 0x4b, 0xe2, 0x3b, 0xf8, 0x7c, 0xbe, 0x8f, 0x61, 0x97, 0xda, 0x5d, 0xfa, 0x91, 0xf4, 0x06,
+	0x7f, 0x7e, 0x33, 0xf3, 0x9f, 0xff, 0x04, 0x40, 0xce, 0xe6, 0x34, 0xbd, 0x99, 0x15, 0x1f, 0x73,
+	0xca, 0xfd, 0x65, 0xc6, 0x38, 0xc3, 0x9e, 0xd0, 0xa4, 0x44, 0xce, 0xa1, 0x3d, 0x2d, 0x5f, 0xf1,
+	0x18, 0xcc, 0x38, 0xb2, 0x4d, 0xd7, 0xf0, 0x9a, 0x81, 0x19, 0x47, 0xe4, 0xc7, 0x00, 0x6b, 0x92,
+	0xd1, 0x90, 0xd3, 0x67, 0x41, 0x06, 0xf4, 0xab, 0xa0, 0x39, 0xc7, 0x4b, 0x80, 0x8c, 0x7e, 0xc6,
+	0x8b, 0xc5, 0x34, 0x4e, 0xa8, 0x6d, 0x08, 0x5e, 0x51, 0x70, 0x08, 0xdd, 0x24, 0xfc, 0x1e, 0x27,
+	0xac, 0x48, 0x79, 0xd5, 0x6e, 0x2d, 0x20, 0x81, 0xbe, 0x64, 0x2b, 0xa0, 0x29, 0x00, 0x4d, 0x43,
+	0x84, 0x56, 0x1a, 0x26, 0xd4, 0x6e, 0xb9, 0x86, 0xd7, 0x0d, 0xc4, 0x33, 0x79, 0x84, 0x81, 0x6e,
+	0x26, 0x5f, 0xb2, 0x34, 0xa7, 0xa5, 0x1b, 0xb9, 0xc8, 0x5b, 0x58, 0xb9, 0xe9, 0x06, 0x8a, 0x42,
+	0x6e, 0xe1, 0x64, 0x1c, 0x45, 0x62, 0x43, 0x65, 0x81, 0xbd, 0x25, 0x0f, 0x60, 0x4d, 0x58, 0x9a,
+	0x17, 0x09, 0x3d, 0xa8, 0xec, 0x09, 0x06, 0x7a, 0x59, 0xe5, 0xd0, 0x83, 0xb6, 0xc8, 0x5b, 0x94,
+	0xf4, 0x46, 0xe8, 0x2b, 0xe9, 0xfb, 0x12, 0x95, 0x00, 0xb9, 0x07, 0x0c, 0x64, 0x8e, 0x87, 0xcc,
+	0x3d, 0x03, 0x4b, 0xab, 0x92, 0x63, 0x09, 0xc2, 0xe9, 0x7a, 0x71, 0xa9, 0x8d, 0x7e, 0x4d, 0xe8,
+	0x09, 0x45, 0x86, 0x88, 0xef, 0xd0, 0x57, 0x43, 0x45, 0x57, 0xf3, 0xb6, 0xe5, 0xf8, 0xce, 0xf5,
+	0x1e, 0xa2, 0x1a, 0xdc, 0xc0, 0x17, 0x38, 0x5a, 0x8d, 0xc6, 0xa1, 0x56, 0x50, 0x3b, 0x85, 0x73,
+	0xb1, 0xe3, 0xeb, 0x7f, 0xab, 0xd2, 0xa1, 0x12, 0x6a, 0xdd, 0xe1, 0xe6, 0x99, 0xea, 0x0e, 0xb7,
+	0x5c, 0x84, 0x34, 0xf0, 0x15, 0x3a, 0x32, 0x33, 0xbc, 0xd2, 0xf0, 0xcd, 0xf8, 0x1d, 0x77, 0x37,
+	0xb0, 0x6a, 0x37, 0xeb, 0x88, 0xff, 0xea, 0xee, 0x2f, 0x00, 0x00, 0xff, 0xff, 0x11, 0x91, 0x61,
+	0x8f, 0x6d, 0x03, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -343,6 +435,7 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type TokenBucketClient interface {
+	CreateBucket(ctx context.Context, in *CreateBucketRequest, opts ...grpc.CallOption) (*CreateBucketResponse, error)
 	AddToken(ctx context.Context, in *AddTokenRequest, opts ...grpc.CallOption) (*AddTokenResponse, error)
 	ConsumeToken(ctx context.Context, in *ConsumeTokenRequest, opts ...grpc.CallOption) (*ConsumeTokenResponse, error)
 	Refill(ctx context.Context, in *RefillTokenRequest, opts ...grpc.CallOption) (*RefillTokenResponse, error)
@@ -354,6 +447,15 @@ type tokenBucketClient struct {
 
 func NewTokenBucketClient(cc *grpc.ClientConn) TokenBucketClient {
 	return &tokenBucketClient{cc}
+}
+
+func (c *tokenBucketClient) CreateBucket(ctx context.Context, in *CreateBucketRequest, opts ...grpc.CallOption) (*CreateBucketResponse, error) {
+	out := new(CreateBucketResponse)
+	err := c.cc.Invoke(ctx, "/tokenbucket.TokenBucket/CreateBucket", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *tokenBucketClient) AddToken(ctx context.Context, in *AddTokenRequest, opts ...grpc.CallOption) (*AddTokenResponse, error) {
@@ -385,6 +487,7 @@ func (c *tokenBucketClient) Refill(ctx context.Context, in *RefillTokenRequest, 
 
 // TokenBucketServer is the server API for TokenBucket service.
 type TokenBucketServer interface {
+	CreateBucket(context.Context, *CreateBucketRequest) (*CreateBucketResponse, error)
 	AddToken(context.Context, *AddTokenRequest) (*AddTokenResponse, error)
 	ConsumeToken(context.Context, *ConsumeTokenRequest) (*ConsumeTokenResponse, error)
 	Refill(context.Context, *RefillTokenRequest) (*RefillTokenResponse, error)
@@ -394,6 +497,9 @@ type TokenBucketServer interface {
 type UnimplementedTokenBucketServer struct {
 }
 
+func (*UnimplementedTokenBucketServer) CreateBucket(ctx context.Context, req *CreateBucketRequest) (*CreateBucketResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateBucket not implemented")
+}
 func (*UnimplementedTokenBucketServer) AddToken(ctx context.Context, req *AddTokenRequest) (*AddTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddToken not implemented")
 }
@@ -406,6 +512,24 @@ func (*UnimplementedTokenBucketServer) Refill(ctx context.Context, req *RefillTo
 
 func RegisterTokenBucketServer(s *grpc.Server, srv TokenBucketServer) {
 	s.RegisterService(&_TokenBucket_serviceDesc, srv)
+}
+
+func _TokenBucket_CreateBucket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateBucketRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TokenBucketServer).CreateBucket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/tokenbucket.TokenBucket/CreateBucket",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TokenBucketServer).CreateBucket(ctx, req.(*CreateBucketRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _TokenBucket_AddToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -466,6 +590,10 @@ var _TokenBucket_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "tokenbucket.TokenBucket",
 	HandlerType: (*TokenBucketServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateBucket",
+			Handler:    _TokenBucket_CreateBucket_Handler,
+		},
 		{
 			MethodName: "AddToken",
 			Handler:    _TokenBucket_AddToken_Handler,

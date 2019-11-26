@@ -1,23 +1,36 @@
-syntax = "proto3";
+//protoc -I tokenbucket/ tokenbucket/token-bucket.proto --go_out=plugins=grpc:tokenbucket
 
+syntax = "proto3";
 package tokenbucket;
 
 service TokenBucket {
+    rpc CreateBucket(CreateBucketRequest) returns (CreateBucketResponse) {}
     rpc AddToken (AddTokenRequest) returns (AddTokenResponse) {}
     rpc ConsumeToken (ConsumeTokenRequest) returns (ConsumeTokenResponse) {}
     rpc Refill (RefillTokenRequest) returns (RefillTokenResponse) {}
 }
 
 message Token {
-    string tokenName = 1;
-    int32 id = 2; // Unique Id for each token
+    int64 id = 2; // Unique Id for each token
+}
+
+message CreateBucketRequest {
+    int64 refillTime = 1;
+    int64 maxAmount = 2;
+    int64 refillAmount = 3;
+    string name = 4;
+}
+
+message CreateBucketResponse {
+    string bucketName = 1;
 }
 
 message AddTokenRequest {
-    Token token = 1;
+    string bucketName = 1;
 }
 
 message ConsumeTokenRequest {
+    string bucketName = 1;
 }
 
 message ConsumeTokenResponse {
@@ -25,13 +38,11 @@ message ConsumeTokenResponse {
 }
 
 message RefillTokenRequest {
-    int32 tokens = 1;
+    string bucketName = 1;
 }
 
 message RefillTokenResponse {
-    bool done = 1;
 }
 
 message AddTokenResponse {
-    bool done = 1;
 }
