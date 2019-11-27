@@ -100,12 +100,8 @@ func (s *rateLimitServer) AddToken(ctx context.Context, in *pb.AddTokenRequest) 
 func (s *rateLimitServer) ConsumeToken(ctx context.Context, in *pb.ConsumeTokenRequest) (*pb.ConsumeTokenResponse, error) {
 	log.Printf("Received request to consume token: %v", in.GetBucketName())
 	bucket := buckets[in.GetBucketName()]
-	var token *pb.Token
 	id, err := removeFromBucket(bucket)
-	if err == nil {
-		token.Id = id
-	}
-	return &pb.ConsumeTokenResponse{Token: token}, err
+	return &pb.ConsumeTokenResponse{Token: &pb.Token{Id: id}}, err
 }
 
 func (s *rateLimitServer) Refill(ctx context.Context, in *pb.RefillTokenRequest) (*pb.RefillTokenResponse, error) {
